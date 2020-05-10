@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<br>
+</br>
+<h2 align="center">K A R A N T I N A</h2>
+{% if current_user.is_authenticated %}
+        <a href="newent" class="btn btn-secondary">Добавить развлечение</a>
+<br>
+</br>
+<h3>News</h3>
+<br>
+</br>
+{% for ent in ents %}
+<div class="rounded shadow-lg bg-success text-white" >
+        <h4> {{ ent.ent.capitalize() }} </h4>
+    <div>
+        <h5> {{ ent.ent_type }} </h5>
+    </div>
+    <div>
+        {{ ent.content }}
+    </div>
+    {% if ent.ent_type == "kino" %}
+    <a class="btn btn-light" href="/new_kino" >
+        Link kino
+    </a>
+    {% endif %}
+    {% if ent.ent_type == "game" %}
+    <a class="btn btn-light" href="/new_games">
+        Link games
+    </a>
+    {% endif %}
+    {% if ent.ent_type == "music" %}
+    <a class="btn btn-light" href="/new_music">
+        Link music
+    </a>
+    {% endif %}
+</div>
+<br>
+</br>
+{% endfor %}
+{% else %}
+<h2 class="font-weight-lighter" align="center"> Приветствую вас на своём сайте. </h2>
+<p class="font-weight-lighter" align="center">
+Здесь каждый может найти занятие себе по вкусу, найти друзей и хорошо провести время на карантине.
+</p>
+<div class="alert alert-primary" role="alert">
+  Авторизируйтесь, чтобы начать пользоваться сайтом!
+</div>
+{% endif %}
+
+{% endblock %}
